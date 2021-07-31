@@ -69,6 +69,8 @@ length is always 8 bytes.
 | -------------------------- | --------------------------------------- |
 | [`common/i32`](#commoni32) | `n` bytes corresponding to UTF-8 string |
 
+Implementations must fail if `n` is negative.
+
 ### `common/json`
 
 | `content`                    |
@@ -87,6 +89,8 @@ valid [JSON](https://datatracker.ietf.org/doc/html/rfc7159) instance.
 Implementations of the identity must fail if the `content` string doesn't contain a
 valid [CBOR](https://datatracker.ietf.org/doc/html/rfc8949) instance.
 
+Implementations must fail if `n` is negative.
+
 ## Compound Codecs
 
 ### `common/list<T>`
@@ -95,6 +99,8 @@ valid [CBOR](https://datatracker.ietf.org/doc/html/rfc8949) instance.
 | -------------------------- | ----------------------------------------- |
 | [`common/i32`](#commoni32) | `n ` instances of `T` without delimiters  |
 
+Implementations must fail if `n` is negative.
+
 ### `common/map<K,V>`
 
 | `n`                        | `e_1`..`e_n`                                   |
@@ -102,6 +108,8 @@ valid [CBOR](https://datatracker.ietf.org/doc/html/rfc8949) instance.
 | [`common/i32`](#commoni32) | `n` instances of (`K`, `V`) without delimiters |
 
 Corresponds to key-value map with `K` keys and `V` values.
+
+Implementations must fail if `n` is negative.
 
 ### `common/function<T,R>`
 
