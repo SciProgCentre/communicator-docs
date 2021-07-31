@@ -5,10 +5,10 @@ This document describes the codec concept of the Communicator protocol.
 Since all data transfer in the Communicator protocol is binary, there should be a set of rules of conversions between
 types in programming languages and binary messages passed by Communicator. They're called codecs.
 
-In Communicator libraries, codec can be represented as object that has two methods: encode for creating binary message
-from language type and decode for making instance of language's type from given binary message.
+In Communicator libraries, the codec can be represented as an object that has two methods: encode for creating binary
+message from language type and decode for making an instance of language's type from the given binary message.
 
-Each codec has its identity. Codec identity is UTF-8 encoded string that is transferred during function call to ensure
+Each codec has its identity. Codec identity is a UTF-8 encoded string that is transferred during function call to ensure
 types of transferred messages. All codec identities must be in the following language:
 
 ```
@@ -19,18 +19,19 @@ compound_identity ::= plain_identity '<' (codec_identity ',' )* codec_identity '
 where `plain_identity` is any char sequence not containing `<`, `>`, and `,`.
 
 The difference between plain identities and compound ones is that the latter ones can define their structure according
-to the codecs they are parametrized by. Defining custom generic codecs is discouraged because of possible complexity of
-the resulting data structure, which makes it difficult to maintain its proper encoding on different platforms.
+to the codecs they are parametrized by. Defining custom generic codecs is discouraged because of the possible complexity
+of the resulting data structure, which makes it difficult to maintain its proper encoding on different platforms.
 
-There can't be a codec with structure corresponding to an infinite input binary message.
+There can't be a codec with the structure corresponding to an infinite input binary message.
 
 There is an optional convention for codecs to have a namespace inside its identities: `namespace/structure`.
 
-All the Communicator libraries must provide builtin codec implementations for structures listed in further sections.
+All the Communicator libraries must provide built-in codec implementations for structures listed in further sections.
 
 Tables in codec specification mean structure layout. The columns from left to right correspond to immediately following
 fragments of binary message without any delimiters. The first row has the names of the parts, and the second row has
-either name of another codec or explanation what bytes stored in the fragment. A shorter structure designation is
+either name of another codec or an explanation of what bytes are stored in the fragment. A shorter structure designation
+is
 "tuple" notation like (`T1`, `T2` ..., `Tn`), which means the same but without names of structure items.
 
 ## Plain Codecs
@@ -53,12 +54,12 @@ Corresponds to 64-bit Big Endian unsigned integer. The length is always 8 bytes.
 
 ### `common/f32`
 
-Corresponds to [IEEE 754](https://ieeexplore.ieee.org/document/4610935) single-precision floating point number. The
+Corresponds to [IEEE 754](https://ieeexplore.ieee.org/document/4610935) single-precision floating-point number. The
 length is always 4 bytes.
 
 ### `common/f64`
 
-Corresponds to [IEEE 754](https://ieeexplore.ieee.org/document/4610935) double-precision floating point number. The
+Corresponds to [IEEE 754](https://ieeexplore.ieee.org/document/4610935) double-precision floating-point number. The
 length is always 8 bytes.
 
 ### `common/utf8`
@@ -73,7 +74,7 @@ length is always 8 bytes.
 | ---------------------------- |
 | [`common/utf8`](#commonutf8) | 
 
-Implementations of the identity must fail, if the `content` string doesn't contain a
+Implementations of the identity must fail if the `content` string doesn't contain a
 valid [JSON](https://datatracker.ietf.org/doc/html/rfc7159) instance.
 
 ### `common/cbor`
@@ -82,7 +83,7 @@ valid [JSON](https://datatracker.ietf.org/doc/html/rfc7159) instance.
 | -------------------------- | -------------------------------------------- |
 | [`common/i32`](#commoni32) | `n` bytes corresponding to CBOR encoded data |
 
-Implementations of the identity must fail, if the `content` string doesn't contain
+Implementations of the identity must fail if the `content` string doesn't contain a
 valid [CBOR](https://datatracker.ietf.org/doc/html/rfc8949) instance.
 
 ## Compound Codecs
