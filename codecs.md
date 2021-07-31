@@ -12,11 +12,12 @@ Each codec has its identity. Codec identity is a UTF-8 encoded string that is tr
 types of transferred messages. All codec identities must be in the following language:
 
 ```
-codec_identity ::= plain_identity | compound_identity
-compound_identity ::= plain_identity '<' (codec_identity ',' )* codec_identity '>'
+codec_identity = plain_identity | compound_identity;
+compound_identity = plain_identity '<' (codec_identity ',' )* codec_identity '>';
+plain_identity = all_characters ( all_characters - '>' - '<' - ',')*;
 ```
 
-where `plain_identity` is any char sequence not containing `<`, `>`, and `,`.
+where `all_characters` is any UTF-8 character.
 
 The difference between plain identities and compound ones is that the latter ones can define their structure according
 to the codecs they are parametrized by. Defining custom generic codecs is discouraged because of the possible complexity
