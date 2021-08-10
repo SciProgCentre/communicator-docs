@@ -32,8 +32,7 @@ All the Communicator libraries must provide built-in codec implementations for s
 Tables in codec specification mean structure layout. The columns from left to right correspond to immediately following
 fragments of binary message without any delimiters. The first row has the names of the parts, and the second row has
 either name of another codec or an explanation of what bytes are stored in the fragment. A shorter structure designation
-is
-"tuple" notation like (`T1`, `T2` ..., `Tn`), which means the same but without names of structure items.
+is "tuple" notation (`T1`, `T2` ..., `Tn`), which means the same but without names of structure items.
 
 ## Plain Codecs
 
@@ -92,6 +91,18 @@ valid [CBOR](https://datatracker.ietf.org/doc/html/rfc8949) instance.
 Implementations must fail if `n` is negative.
 
 ## Compound Codecs
+
+### `common/pair<A,B>`
+
+| `first`                           | `second`                            |
+| --------------------------------- | ----------------------------------- |
+| `A` instance as the first element | `B ` instance as the second element |
+
+### `common/triple<A,B,C>`
+
+| `first`                           | `second`                            | `third`                           |
+| --------------------------------- | ----------------------------------- | --------------------------------- |
+| `A` instance as the first element | `B ` instance as the second element | `C` instance as the third element |
 
 ### `common/list<T>`
 
